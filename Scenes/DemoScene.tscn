@@ -12,16 +12,16 @@
 [ext_resource path="res://Scenes/FantasyTown/wall.tscn" type="PackedScene" id=10]
 [ext_resource path="res://Scenes/FantasyTown/planks.tscn" type="PackedScene" id=11]
 [ext_resource path="res://Scenes/FantasyTown/blade.tscn" type="PackedScene" id=12]
-[ext_resource path="res://Scenes/Player/PlayerMesh.tscn" type="PackedScene" id=13]
+[ext_resource path="res://Scenes/Player/Player.tscn" type="PackedScene" id=13]
 
-[sub_resource type="ProceduralSky" id=2]
+[sub_resource type="ProceduralSky" id=1]
 sky_top_color = Color( 0.588235, 0.831373, 0.968627, 1 )
 sky_horizon_color = Color( 0.835294, 0.682353, 0.419608, 1 )
 ground_bottom_color = Color( 0, 0, 0, 1 )
 
-[sub_resource type="Environment" id=1]
+[sub_resource type="Environment" id=2]
 background_mode = 2
-background_sky = SubResource( 2 )
+background_sky = SubResource( 1 )
 
 [node name="DemoScene" type="Spatial"]
 
@@ -413,7 +413,7 @@ transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -1, 0, -2 )
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -1, 0, -4 )
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="."]
-environment = SubResource( 1 )
+environment = SubResource( 2 )
 
 [node name="cartHigh" parent="." instance=ExtResource( 7 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 5, 2, -1 )

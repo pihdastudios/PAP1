@@ -1,0 +1,9 @@
+.mono
+.import
+bin
+.godot
+mono_crash.*
+.idea
+*.blend1
+*.csproj.old*
+*.unwrap_cache
