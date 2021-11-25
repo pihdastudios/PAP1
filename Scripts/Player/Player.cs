@@ -72,6 +72,11 @@ public class Player : KinematicBody
 		this.isCrouching = isCrouching;
 	}
 
+	public Player()
+	{
+		
+	}
+
 	public override void _Ready()
 	{
 		camera = GetNode<Camera>("Head/Camera");
@@ -210,14 +215,14 @@ public class Player : KinematicBody
 		}
 
 		// Sprint
-		if (Input.IsActionPressed("sprint") && canSprint)
-		{
-			AddState(States.Sprinting);
-		}
-		else
-		{
-			RemoveState(States.Sprinting);
-		}
+		// if (Input.IsActionPressed("sprint") && canSprint)
+		// {
+		// 	AddState(States.Sprinting);
+		// }
+		// else
+		// {
+		// 	RemoveState(States.Sprinting);
+		// }
 	}
 
 	private void ProcessFootsteps(float delta)
