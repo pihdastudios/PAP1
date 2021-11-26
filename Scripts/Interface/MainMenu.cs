@@ -20,11 +20,11 @@ public class MainMenu : Control
     public override void _Ready()
     {
         // Get nodes - the generic is a class, argument is node path.
-        address = GetNode<LineEdit>("Address");
-        hostButton = GetNode<Button>("HostButton");
-        joinButton = GetNode<Button>("JoinButton");
-        statusOk = GetNode<Label>("StatusOk");
-        statusFail = GetNode<Label>("StatusFail");
+        address = GetNode<LineEdit>("LobbyPanel/Address");
+        hostButton = GetNode<Button>("LobbyPanel/HostButton");
+        joinButton = GetNode<Button>("LobbyPanel/JoinButton");
+        statusOk = GetNode<Label>("LobbyPanel/StatusOk");
+        statusFail = GetNode<Label>("LobbyPanel/StatusFail");
 
         // Connect all callbacks related to networking.
         // Note: Use snake_case when talking to engine API.
@@ -44,10 +44,11 @@ public class MainMenu : Control
         var stage = ResourceLoader.Load<PackedScene>("res://Scenes/DemoScene.tscn").Instance();
 
         // Connect deferred so we can safely erase it from the callback.
-        stage.Connect("GameFinished", this, nameof(EndGame), new Godot.Collections.Array(),
-            (int) ConnectFlags.Deferred);
-
+        // stage.Connect("GameFinished", this, nameof(EndGame), new Godot.Collections.Array(),
+        //     (int) ConnectFlags.Deferred);
+        
         GetTree().Root.AddChild(stage);
+        Globals.Player2Id = id;
         Hide();
     }
 

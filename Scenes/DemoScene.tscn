@@ -12,7 +12,7 @@
 [ext_resource path="res://Scenes/FantasyTown/wall.tscn" type="PackedScene" id=10]
 [ext_resource path="res://Scenes/FantasyTown/planks.tscn" type="PackedScene" id=11]
 [ext_resource path="res://Scenes/FantasyTown/blade.tscn" type="PackedScene" id=12]
-[ext_resource path="res://Scenes/Player/Player.tscn" type="PackedScene" id=13]
+[ext_resource path="res://Scripts/DemoScene.cs" type="Script" id=13]
 
 [sub_resource type="ProceduralSky" id=1]
 sky_top_color = Color( 0.588235, 0.831373, 0.968627, 1 )
@@ -24,6 +24,7 @@ background_mode = 2
 background_sky = SubResource( 1 )
 
 [node name="DemoScene" type="Spatial"]
+script = ExtResource( 13 )
 
 [node name="wallBlock" parent="." instance=ExtResource( 4 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -2 )
@@ -639,8 +640,8 @@ transform = Transform( -4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, 1, 2, 3
 [node name="blade" parent="." instance=ExtResource( 12 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 1, 2, 3 )
 
-[node name="Player" parent="." instance=ExtResource( 13 )]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -4, 0, 0 )
+[node name="Player1Pos" type="Position3D" parent="."]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -4.46515, 0.328967, 0 )
 
-[node name="Player2" parent="." instance=ExtResource( 13 )]
-transform = Transform( -0.866025, 0, 0.5, 0, 1, 0, -0.5, 0, -0.866025, 5, 2, 0 )
+[node name="Player2Pos" type="Position3D" parent="."]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 5.70176, 2.27341, 0 )

@@ -115,16 +115,18 @@ public class Player : KinematicBody
 			Fall(delta);
 		}
 
-		vel = MoveAndSlide(vel, new Vector3(0, 1, 0), true, 1, Mathf.Deg2Rad(MaxSlopeAngle));
-
+		if (IsNetworkMaster())
+		{
+			vel = MoveAndSlide(vel, new Vector3(0, 1, 0), true, 1, Mathf.Deg2Rad(MaxSlopeAngle));
+		}
 
 		ProcessAim();
 		ProcessFootsteps(delta);
-		ProcessCollisions();
+		// ProcessCollisions();
 		// ProcessSprinting(delta);
 		// processCrouching(delta);
-		ProcessStairs(delta);
-		ProcessLanding(delta);
+		// ProcessStairs(delta);
+		// ProcessLanding(delta);
 
 		ProcessInteraction();
 	}
