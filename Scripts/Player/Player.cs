@@ -66,6 +66,9 @@ public class Player : KinematicBody
 	private Vector2 inputMovemnetVec;
 
 	private List<States> currentStates;
+	
+	public enum KEY {FORWARD, BACKWARD, LEFT, RIGHT, JUMP, SPRINT};
+	public bool[] Command = {false, false, false, false, false, false};
 
 	public Player(bool isCrouching)
 	{
@@ -80,7 +83,7 @@ public class Player : KinematicBody
 	public override void _Ready()
 	{
 		camera = GetNode<Camera>("Head/Camera");
-		Input.SetMouseMode(Input.MouseMode.Captured);
+//		Input.SetMouseMode(Input.MouseMode.Captured);
 		hud = GetNode<Hud>("Hud");
 		head = GetNode<Spatial>("Head");
 		floorCheck = GetNode<RayCast>("FloorCheck");
@@ -93,17 +96,18 @@ public class Player : KinematicBody
 		currentStates = new List<States>();
 	}
 
-	public override void _Input(InputEvent @event)
-	{
-		if (@event is InputEventMouseMotion motion)
-		{
-			cameraChange = motion.Relative;
-		}
-	}
+//	public override void _Input(InputEvent @event)
+//	{
+//		if (@event is InputEventMouseMotion motion)
+//		{
+//			cameraChange = motion.Relative;
+//		}
+//	}
 
 	public override void _PhysicsProcess(float delta)
 	{
 		ProcessInput(delta);
+//		ProcessAim();
 
 		if (currentStates.Contains(States.Walking))
 		{
@@ -119,8 +123,7 @@ public class Player : KinematicBody
 		{
 			vel = MoveAndSlide(vel, new Vector3(0, 1, 0), true, 1, Mathf.Deg2Rad(MaxSlopeAngle));
 		}
-
-		ProcessAim();
+		
 		ProcessFootsteps(delta);
 		// ProcessCollisions();
 		// ProcessSprinting(delta);
@@ -163,36 +166,47 @@ public class Player : KinematicBody
 		}
 	}
 
-	private void ProcessAim()
-	{
-		if (cameraChange.Length() > 0)
-		{
-			this.RotateY(Mathf.Deg2Rad(-cameraChange.x * Settings.MouseSensitivity));
-
-			var change = -cameraChange.y * Settings.MouseSensitivity;
-			if (change + cameraAngle < 90 && change + cameraAngle > -90)
-			{
-				camera.RotateX(Mathf.Deg2Rad(change));
-				cameraAngle += change;
-			}
-
-			cameraChange = new Vector2();
-		}
-	}
+//	private void ProcessAim()
+//	{
+//		if (cameraChange.Length() > 0)
+//		{
+//			this.RotateY(Mathf.Deg2Rad(-cameraChange.x * Settings.MouseSensitivity));
+//
+//			var change = -cameraChange.y * Settings.MouseSensitivity;
+//			if (change + cameraAngle < 90 && change + cameraAngle > -90)
+//			{
+//				camera.RotateX(Mathf.Deg2Rad(change));
+//				cameraAngle += change;
+//			}
+//
+//			cameraChange = new Vector2();
+//		}
+//	}
 
 	private void ProcessInput(float _)
 	{
 		inputMovemnetVec = new Vector2();
 		dir = new Vector3();
 		var camXform = GlobalTransform;
-
-		if (Input.IsActionPressed("move_forward"))
+//
+//		if (Input.IsActionPressed("move_forward"))
+//			// GD.Print("maju");
+//			inputMovemnetVec.y += 1;
+//		if (Input.IsActionPressed("move_backward"))
+//			inputMovemnetVec.y -= 1;
+//		if (Input.IsActionPressed("move_left"))
+//			inputMovemnetVec.x -= 1;
+//		if (Input.IsActionPressed("move_right"))
+//			inputMovemnetVec.x += 1;
+//
+		if (Command[(int) KEY.FORWARD])
+			// GD.Print("maju");
 			inputMovemnetVec.y += 1;
-		if (Input.IsActionPressed("move_backward"))
+		if (Command[(int) KEY.BACKWARD])
 			inputMovemnetVec.y -= 1;
-		if (Input.IsActionPressed("move_left"))
+		if (Command[(int) KEY.LEFT])
 			inputMovemnetVec.x -= 1;
-		if (Input.IsActionPressed("move_right"))
+		if (Command[(int) KEY.RIGHT])
 			inputMovemnetVec.x += 1;
 
 		if (inputMovemnetVec.Length() != 0)
@@ -210,7 +224,7 @@ public class Player : KinematicBody
 		dir += camXform.basis.x.Normalized() * inputMovemnetVec.x;
 
 		// Jump
-		if (Input.IsActionPressed("jump") && IsOnFloor() && !isDead && canJump)
+		if (Command[(int) KEY.JUMP] && IsOnFloor() && !isDead && canJump)
 		{
 			vel.y = JumpSpeed;
 			// Play jump audio
@@ -277,7 +291,7 @@ public class Player : KinematicBody
 		}
 
 		// recovery
-		else if (canSprint && !Input.IsActionPressed("sprint"))
+		else if (canSprint && !Command[(int) KEY.SPRINT])
 		{
 			timeSprinting -= delta;
 			timeSprinting = Mathf.Clamp(timeSprinting, 0, MaxSprintTime);
