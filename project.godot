@@ -14,6 +14,10 @@ config/name="Pap 1"
 run/main_scene="res://Scenes/Interface/MainMenu.tscn"
 config/icon="res://icon.png"
 
+[global]
+
+resolution=false
+
 [importer_defaults]
 
 scene={

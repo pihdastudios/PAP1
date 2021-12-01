@@ -6,6 +6,22 @@
 [node name="AttackerHUD" type="CanvasLayer"]
 script = ExtResource( 1 )
 
+[node name="CenterContainer" type="CenterContainer" parent="."]
+anchor_right = 1.0
+anchor_bottom = 1.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="TextureRect" type="TextureRect" parent="CenterContainer"]
+margin_right = 645.0
+margin_bottom = 433.0
+rect_scale = Vector2( 0.1, 0.1 )
+texture = ExtResource( 2 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
 [node name="HBoxContainer2" type="HBoxContainer" parent="."]
 anchor_top = 1.0
 anchor_bottom = 1.0
@@ -76,8 +92,3 @@ margin_left = 216.0
 margin_right = 266.0
 margin_bottom = 20.0
 text = "Items"
-
-[node name="Sprite" type="Sprite" parent="."]
-position = Vector2( 800, 450 )
-scale = Vector2( 0.1, 0.1 )
-texture = ExtResource( 2 )
