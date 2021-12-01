@@ -18,20 +18,24 @@ public partial class DemoScene : Spatial
 		var nonControlledPlayer = nonControlledPlayerScn.Instance<Spatial>();
 
 		var player1 = playerScn.Instance<KinematicBody>();
-		player1.Name = GetTree().GetNetworkUniqueId().ToString();
 		player1Pos = GetNode<Position3D>("Player1Pos");
 		player1.GlobalTransform = player1Pos.GlobalTransform;
 
 		var player2 = playerScn.Instance<KinematicBody>();
-		player2.Name = Globals.Player2Id.ToString();
 		player2Pos = GetNode<Position3D>("Player2Pos");
 		player2.GlobalTransform = player2Pos.GlobalTransform;
 
 		if(Globals.role == (int) Role.ATTACKER){
-			player1.AddChild(controlledPlayer);			
+			player1.Name = GetTree().GetNetworkUniqueId().ToString();
+			player1.AddChild(controlledPlayer);
+			
+			player2.Name = Globals.PeerId.ToString();
 			player2.AddChild(nonControlledPlayer);
 		}else{
+			player1.Name = Globals.PeerId.ToString();
 			player1.AddChild(nonControlledPlayer);
+
+			player2.Name = GetTree().GetNetworkUniqueId().ToString();
 			player2.AddChild(controlledPlayer);
 		}
 		AddChild(player1);

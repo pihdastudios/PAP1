@@ -41,6 +41,7 @@ public class MainMenu : Control
 	// Callback from SceneTree.
 	private void PlayerConnected(int id)
 	{
+		Globals.PeerId = id;
 		// Someone connected, start the game!
 		var stage = ResourceLoader.Load<PackedScene>("res://Scenes/DemoScene.tscn").Instance();
 
@@ -49,7 +50,6 @@ public class MainMenu : Control
 		//     (int) ConnectFlags.Deferred);
 		
 		GetTree().Root.AddChild(stage);
-		Globals.Player2Id = id;
 		Hide();
 	}
 

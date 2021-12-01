@@ -103,7 +103,6 @@ public class Player : KinematicBody
 //			cameraChange = motion.Relative;
 //		}
 //	}
-
 	public override void _PhysicsProcess(float delta)
 	{
 		ProcessInput(delta);
@@ -119,9 +118,9 @@ public class Player : KinematicBody
 			Fall(delta);
 		}
 
-		if (IsNetworkMaster())
-		{
-			vel = MoveAndSlide(vel, new Vector3(0, 1, 0), true, 1, Mathf.Deg2Rad(MaxSlopeAngle));
+		// if (IsNetworkMaster())
+		if(head.HasMethod("is_player")){
+			RpcUnreliable("network_update", vel, MaxSlopeAngle);
 		}
 		
 		ProcessFootsteps(delta);
@@ -132,6 +131,12 @@ public class Player : KinematicBody
 		// ProcessLanding(delta);
 
 		ProcessInteraction();
+	}
+
+	[Sync]
+	private void network_update(Vector3 updatedVel, int updatedMaxSlopeAngle)
+	{
+		vel = MoveAndSlide(updatedVel, new Vector3(0, 1, 0), true, 1, Mathf.Deg2Rad(updatedMaxSlopeAngle));
 	}
 
 	private void ProcessInteraction()

@@ -58,6 +58,11 @@ public class ControlledPlayer : Spatial
 			cameraChange = new Vector2();
 		}
 	}
+	
+	public bool is_player()
+	{
+		return true;
+	}
 
 //  // Called every frame. 'delta' is the elapsed time since the previous frame.
 //  public override void _Process(float delta)
