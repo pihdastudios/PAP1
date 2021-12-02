@@ -5,7 +5,6 @@ using System.Reflection;
 using Pap1.Scripts;
 using Pap1.Scripts.Attributes;
 
-[PlayerClass]
 public class Player : KinematicBody
 {
     public enum States
@@ -14,6 +13,8 @@ public class Player : KinematicBody
         Walking,
         Sprinting
     }
+
+    public bool IsPlayerOne = false;
 
     #region Physics properties
 
@@ -130,7 +131,8 @@ public class Player : KinematicBody
         }
 
         // if (IsNetworkMaster())
-        if (Attribute.GetCustomAttribute(head.GetType(), typeof(ActivePlayer)) != null)
+        // if (Attribute.GetCustomAttribute(head.GetType(), typeof(ActivePlayer)) != null)
+        if (head.HasMethod("IsPlayer"))
         {
             RpcUnreliable("network_update", vel, MaxSlopeAngle);
         }
@@ -153,34 +155,34 @@ public class Player : KinematicBody
 
     private void ProcessInteraction()
     {
-        if (((Node) interactionRc.GetCollider()) != null)
-        {
-            if (((Node) interactionRc.GetCollider()).GetParent() is IInteractable inter)
-            {
-                var info = inter.GetInfo();
-                // hud.SetInteractionText(info);
-                if (Input.IsActionJustPressed("interact"))
-                {
-                    inter.Interact();
-                }
-            }
-            else if (((Node) interactionRc.GetCollider()).GetParent() is ISkipToParent)
-            {
-                if (((Node) interactionRc.GetCollider()).GetParent().GetParent() is IInteractable inter1)
-                {
-                    var info = inter1.GetInfo();
-                    // hud.SetInteractionText(info);
-                    if (Input.IsActionJustPressed("interact"))
-                    {
-                        inter1.Interact();
-                    }
-                }
-            }
-        }
-        else
-        {
-            // hud.SetInteractionText("");
-        }
+        // if (((Node) interactionRc.GetCollider()) != null)
+        // {
+        //     if (((Node) interactionRc.GetCollider()).GetParent() is IInteractable inter)
+        //     {
+        //         var info = inter.GetInfo();
+        //         // hud.SetInteractionText(info);
+        //         if (Input.IsActionJustPressed("interact"))
+        //         {
+        //             inter.Interact();
+        //         }
+        //     }
+        //     else if (((Node) interactionRc.GetCollider()).GetParent() is ISkipToParent)
+        //     {
+        //         if (((Node) interactionRc.GetCollider()).GetParent().GetParent() is IInteractable inter1)
+        //         {
+        //             var info = inter1.GetInfo();
+        //             // hud.SetInteractionText(info);
+        //             if (Input.IsActionJustPressed("interact"))
+        //             {
+        //                 inter1.Interact();
+        //             }
+        //         }
+        //     }
+        // }
+        // else
+        // {
+        //     // hud.SetInteractionText("");
+        // }
     }
 
 //	private void ProcessAim()

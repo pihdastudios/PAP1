@@ -3,21 +3,21 @@ using System;
 
 public class Stats : Node{
   [Export]
-  private float max_HP = 10;
-  private float current_HP;
+  private float maxHp = 10;
+  private float currentHp;
   public override void _Ready()
 	{
-		current_HP = max_HP;
+		currentHp = maxHp;
 	}
   public void take_hit(float damage)
 	{
-		current_HP -= damage;
+		currentHp -= damage;
 	
-    if(current_HP <= 0)
-      die();
+    if(currentHp <= 0)
+      Die();
 	}
 
-  private void die(){
+  public static void Die(){
     // emit_signal("died_signal");
   }
 }

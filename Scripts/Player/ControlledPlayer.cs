@@ -90,9 +90,8 @@ public class ControlledPlayer : Spatial
         }
     }
 
-    public bool IsPlayer()
+    public void IsPlayer()
     {
-        return true;
     }
 
 //  // Called every frame. 'delta' is the elapsed time since the previous frame.
