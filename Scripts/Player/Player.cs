@@ -404,4 +404,14 @@ public class Player : KinematicBody
             }
         }
     }
+
+    public void Win()
+    {
+        
+    }
+
+    public void Lose()
+    {
+        
+    }
 }
