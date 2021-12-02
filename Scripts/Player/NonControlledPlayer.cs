@@ -2,7 +2,7 @@ using Godot;
 using System;
 using Pap1.Scripts;
 
-public class NonControlledPlayer : KinematicBody
+public class NonControlledPlayer : Spatial
 {
 	// Declare member variables here. Examples:
 	// private int a = 2;

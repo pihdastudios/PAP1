@@ -2,7 +2,7 @@ using Godot;
 using System;
 using Pap1.Scripts;
 
-public class ControlledPlayer : KinematicBody
+public class ControlledPlayer : Spatial
 {
 	// Declare member variables here. Examples:
 	// private int a = 2;
@@ -11,6 +11,7 @@ public class ControlledPlayer : KinematicBody
 	private float cameraAngle;
 	private Vector2 cameraChange;
 	private Player character;
+	private SpellController spellController;
 
 	// Called when the node enters the scene tree for the first time.
 	public override void _Ready()
@@ -18,6 +19,7 @@ public class ControlledPlayer : KinematicBody
 		Input.SetMouseMode(Input.MouseMode.Captured);
 		camera = GetNode<Camera>("Camera");
 		character = GetParent<Player>();
+		spellController = GetNode<SpellController>("SpellController");
 		camera.Current = true;
 	}
 	
@@ -33,7 +35,16 @@ public class ControlledPlayer : KinematicBody
 		character.Command[(int) Player.KEY.RIGHT] = Input.IsActionPressed("move_right");
 		character.Command[(int) Player.KEY.JUMP] = Input.IsActionPressed("jump");
 //		character.Command[(int) Player.KEY.SPRINT] = Input.IsActionPressed("sprint");
-		
+		if (@event is InputEventMouseButton mouseEvent && mouseEvent.Pressed)
+    {
+        switch ((ButtonList)mouseEvent.ButtonIndex)
+        {
+            case ButtonList.Left:
+                spellController.cast();
+                break;
+        }
+    }
+			
 	}
 	
 	public override void _PhysicsProcess(float delta)
