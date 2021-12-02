@@ -90,7 +90,7 @@ public class ControlledPlayer : Spatial
         }
     }
 
-    public bool is_player()
+    public bool IsPlayer()
     {
         return true;
     }

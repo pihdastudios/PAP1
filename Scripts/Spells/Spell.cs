@@ -3,7 +3,7 @@ using System;
 
 public class Spell : Spatial
 {
-    private readonly PackedScene projectile = GD.Load<PackedScene>("res://Scenes/Spells/spell_fireball.tscn");
+    private readonly PackedScene projectile = GD.Load<PackedScene>("res://Scenes/Spells/SpellFireball.tscn");
     [Export] public float ProjectileSpeed = 20, MillisBetweenShots = 200;
     private Timer rofTimer;
     private bool canShoot = true;
@@ -21,8 +21,8 @@ public class Spell : Spatial
         var newProjectile = projectile.Instance<SpellFireball>();
         newProjectile.GlobalTransform = GetNode<Spatial>("Muzzle").GlobalTransform;
         newProjectile.Speed = ProjectileSpeed;
-        var sceneRoot = (Node) GetTree().Root.GetChildren()[0];
-        sceneRoot.AddChild(newProjectile);
+        var sceneRoot = GetTree().Root.GetChildren()[0] as Node;
+        sceneRoot?.AddChild(newProjectile);
         canShoot = false;
         rofTimer.Start();
     }
