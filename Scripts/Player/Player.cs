@@ -71,14 +71,14 @@ public class Player : KinematicBody
 
     private List<States> currentStates;
 
-    public enum KEY
+    public enum Key
     {
-        FORWARD,
-        BACKWARD,
-        LEFT,
-        RIGHT,
-        JUMP,
-        SPRINT
+        Forward,
+        Backward,
+        Left,
+        Right,
+        Jump,
+        Sprint
     };
 
     public bool[] Command = {false, false, false, false, false, false};
@@ -218,14 +218,14 @@ public class Player : KinematicBody
 //		if (Input.IsActionPressed("move_right"))
 //			inputMovemnetVec.x += 1;
 //
-        if (Command[(int) KEY.FORWARD])
+        if (Command[(int) Key.Forward])
             // GD.Print("maju");
             inputMovemnetVec.y += 1;
-        if (Command[(int) KEY.BACKWARD])
+        if (Command[(int) Key.Backward])
             inputMovemnetVec.y -= 1;
-        if (Command[(int) KEY.LEFT])
+        if (Command[(int) Key.Left])
             inputMovemnetVec.x -= 1;
-        if (Command[(int) KEY.RIGHT])
+        if (Command[(int) Key.Right])
             inputMovemnetVec.x += 1;
 
         if (inputMovemnetVec.Length() != 0)
@@ -243,7 +243,7 @@ public class Player : KinematicBody
         dir += camXform.basis.x.Normalized() * inputMovemnetVec.x;
 
         // Jump
-        if (Command[(int) KEY.JUMP] && IsOnFloor() && !isDead && canJump)
+        if (Command[(int) Key.Jump] && IsOnFloor() && !isDead && canJump)
         {
             vel.y = JumpSpeed;
             // Play jump audio
@@ -310,7 +310,7 @@ public class Player : KinematicBody
         }
 
         // recovery
-        else if (canSprint && !Command[(int) KEY.SPRINT])
+        else if (canSprint && !Command[(int) Key.Sprint])
         {
             timeSprinting -= delta;
             timeSprinting = Mathf.Clamp(timeSprinting, 0, MaxSprintTime);

@@ -30,11 +30,11 @@ public class ControlledPlayer : Spatial
             cameraChange = motion.Relative;
         }
 
-        character.Command[(int) Player.KEY.FORWARD] = Input.IsActionPressed("move_forward");
-        character.Command[(int) Player.KEY.BACKWARD] = Input.IsActionPressed("move_backward");
-        character.Command[(int) Player.KEY.LEFT] = Input.IsActionPressed("move_left");
-        character.Command[(int) Player.KEY.RIGHT] = Input.IsActionPressed("move_right");
-        character.Command[(int) Player.KEY.JUMP] = Input.IsActionPressed("jump");
+        character.Command[(int) Player.Key.Forward] = Input.IsActionPressed("move_forward");
+        character.Command[(int) Player.Key.Backward] = Input.IsActionPressed("move_backward");
+        character.Command[(int) Player.Key.Left] = Input.IsActionPressed("move_left");
+        character.Command[(int) Player.Key.Right] = Input.IsActionPressed("move_right");
+        character.Command[(int) Player.Key.Jump] = Input.IsActionPressed("jump");
 //		character.Command[(int) Player.KEY.SPRINT] = Input.IsActionPressed("sprint");
         if (!(@event is InputEventMouseButton mouseEvent) || !mouseEvent.Pressed) return;
         switch ((ButtonList) mouseEvent.ButtonIndex)
