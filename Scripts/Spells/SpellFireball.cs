@@ -2,10 +2,10 @@ using Godot;
 using System;
 using Pap1.Scripts;
 
-public class spell_fireball : Spatial
+public class SpellFireball : Spatial
 {
 	[Export]
-	public float speed = 70, damage = 1;
+	public float Speed = 70, Damage = 1;
 	private float KILL_TIME = 2, timer = 0;
 
 	public override void _Ready()
@@ -14,8 +14,8 @@ public class spell_fireball : Spatial
 
 	public override void _PhysicsProcess(float delta)
 	{
-		var forward_direction = GlobalTransform.basis.z.Normalized();
-		GlobalTranslate(forward_direction * speed * delta);
+		var forwardDirection = GlobalTransform.basis.z.Normalized();
+		GlobalTranslate(forwardDirection * Speed * delta);
 		
 		timer += delta;
 		if(timer > KILL_TIME)
@@ -25,9 +25,8 @@ public class spell_fireball : Spatial
 	private void _on_Area_body_entered(Node body)
 	{
 		QueueFree();
-		if(body.HasNode("Stats")){
-			Stats stats_node = (Stats) body.FindNode("Stats");
-			stats_node.take_hit(damage);
-		}
+		if (!body.HasNode("Stats")) return;
+		var statsNode = body.FindNode("Stats") as Stats;
+		statsNode?.take_hit(Damage);
 	}
 }

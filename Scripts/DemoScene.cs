@@ -5,6 +5,7 @@ public partial class DemoScene : Spatial
 {
 	private Position3D player1Pos;
 	private Position3D player2Pos;
+	private Area finishArea;
 	private enum Role {ATTACKER, DEFENDER};
 	
 	private PackedScene playerScn= GD.Load<PackedScene>("res://Scenes/Player/Player.tscn");
@@ -40,5 +41,12 @@ public partial class DemoScene : Spatial
 		}
 		AddChild(player1);
 		AddChild(player2);
+
+		// finishArea = GetNode <Area>("Area");
+	}
+
+	public void OnAreaBodyEntered(Node body)
+	{
+		
 	}
 }
