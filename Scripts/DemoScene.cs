@@ -10,13 +10,7 @@ public partial class DemoScene : Spatial
     private Player player2;
 
     [Signal]
-    public delegate void GameOverSignal(Role winner);
-
-    public enum Role
-    {
-        Attacker,
-        Defender
-    };
+    public delegate void GameOverSignal(Globals.Role winner);
 
     private readonly PackedScene playerScn = GD.Load<PackedScene>("res://Scenes/Player/Player.tscn");
 
@@ -42,22 +36,22 @@ public partial class DemoScene : Spatial
         player2.GlobalTransform = player2Pos.GlobalTransform;
 
         // TODO: Add role changer
-        // if (Globals.role == (int) Role.Attacker)
-        // {
-        player1.Name = GetTree().GetNetworkUniqueId().ToString();
-        player1.AddChild(controlledPlayer);
+        if (Globals.CurrentRole == Globals.Role.Attacker)
+        {
+            player1.Name = GetTree().GetNetworkUniqueId().ToString();
+            player1.AddChild(controlledPlayer);
 
-        player2.Name = Globals.PeerId.ToString();
-        player2.AddChild(nonControlledPlayer);
-        // }
-        // else
-        // {
-        //     player1.Name = Globals.PeerId.ToString();
-        //     player1.AddChild(nonControlledPlayer);
-        //
-        //     player2.Name = GetTree().GetNetworkUniqueId().ToString();
-        //     player2.AddChild(controlledPlayer);
-        // }
+            player2.Name = Globals.PeerId.ToString();
+            player2.AddChild(nonControlledPlayer);
+        }
+        else
+        {
+            player1.Name = Globals.PeerId.ToString();
+            player1.AddChild(nonControlledPlayer);
+
+            player2.Name = GetTree().GetNetworkUniqueId().ToString();
+            player2.AddChild(controlledPlayer);
+        }
 
         AddChild(player1);
         AddChild(player2);
@@ -67,21 +61,29 @@ public partial class DemoScene : Spatial
     {
         if (body?.Get("IsPlayerOne") != null && (bool) body.Get("IsPlayerOne"))
         {
-            EmitSignal(nameof(GameOverSignal), Role.Attacker);
+            EmitSignal(nameof(GameOverSignal), Globals.Role.Attacker);
+            // GD.Print("win");
         }
     }
 
-    public void OnGameOver(Role winner)
+    public void OnGameOver(Globals.Role winner)
     {
-        if (winner == Role.Attacker)
+        switch (winner)
         {
-            player1.Win();
-            player2.Lose();
-        }
-        else
-        {
-            player1.Lose();
-            player2.Win();
+            case Globals.Role.Attacker when IsNetworkMaster():
+                player1.Win();
+                break;
+            case Globals.Role.Attacker:
+                player1.Lose();
+                break;
+            case Globals.Role.Defender when IsNetworkMaster():
+                player1.Lose();
+                break;
+            case Globals.Role.Defender:
+                player1.Win();
+                break;
+            default:
+                throw new ArgumentOutOfRangeException(nameof(winner), winner, null);
         }
     }
 }

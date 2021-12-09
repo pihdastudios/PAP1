@@ -407,11 +407,13 @@ public class Player : KinematicBody
 
     public void Win()
     {
-        
+        GD.Print("Win");
+        hud.Win();
     }
 
     public void Lose()
     {
-        
+        GD.Print("Lose");
+        hud.Lose();
     }
 }

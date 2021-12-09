@@ -115,7 +115,7 @@ public class MainMenu : Control
 
 	private void OnHostPressed()
 	{
-		Globals.role = (int) Role.ATTACKER;
+		Globals.CurrentRole =  Globals.Role.Attacker;
 		peer = new NetworkedMultiplayerENet();
 		peer.CompressionMode = NetworkedMultiplayerENet.CompressionModeEnum.RangeCoder;
 		var err = peer.CreateServer(DefaultPort, MaxNumberOfPeers);
@@ -134,7 +134,7 @@ public class MainMenu : Control
 
 	private void OnJoinPressed()
 	{
-		Globals.role = (int) Role.DEFENDER;
+		Globals.CurrentRole = Globals.Role.Defender;
 		var ip = address.Text;
 		if (!ip.IsValidIPAddress())
 		{

@@ -1,31 +1,32 @@
-[gd_scene load_steps=3 format=2]
+[gd_scene load_steps=4 format=2]
 
 [ext_resource path="res://Scripts/Interface/Hud.cs" type="Script" id=1]
 [ext_resource path="res://Assets/Sprites/pointer.png" type="Texture" id=2]
+[ext_resource path="res://Scenes/Interface/GameOver.tscn" type="PackedScene" id=3]
 
 [node name="HUD" type="CanvasLayer"]
 script = ExtResource( 1 )
 
-[node name="CenterContainer" type="CenterContainer" parent="."]
+[node name="Center" type="CenterContainer" parent="."]
 anchor_right = 1.0
 anchor_bottom = 1.0
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="VBoxContainer" type="VBoxContainer" parent="CenterContainer"]
+[node name="VBoxContainer" type="VBoxContainer" parent="Center"]
 margin_left = 497.0
 margin_top = 267.0
 margin_right = 527.0
 margin_bottom = 333.0
 alignment = 1
 
-[node name="GameOverLabel" type="Label" parent="CenterContainer/VBoxContainer"]
+[node name="GameOverLabel" type="Label" parent="Center/VBoxContainer"]
 margin_right = 30.0
 margin_bottom = 14.0
 align = 2
 
-[node name="TextureRect" type="TextureRect" parent="CenterContainer/VBoxContainer"]
+[node name="TextureRect" type="TextureRect" parent="Center/VBoxContainer"]
 margin_top = 18.0
 margin_right = 30.0
 margin_bottom = 48.0
@@ -36,14 +37,14 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="InteractionLabel" type="Label" parent="CenterContainer/VBoxContainer"]
+[node name="InteractionLabel" type="Label" parent="Center/VBoxContainer"]
 margin_top = 52.0
 margin_right = 30.0
 margin_bottom = 66.0
 text = "Es"
 align = 1
 
-[node name="HBoxContainer2" type="HBoxContainer" parent="."]
+[node name="Items" type="HBoxContainer" parent="."]
 anchor_top = 1.0
 anchor_bottom = 1.0
 margin_left = 100.0
@@ -54,20 +55,20 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="HBoxContainer" type="HBoxContainer" parent="HBoxContainer2"]
+[node name="HBoxContainer" type="HBoxContainer" parent="Items"]
 margin_right = 146.0
 margin_bottom = 20.0
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="Label" type="Label" parent="HBoxContainer2/HBoxContainer"]
+[node name="Label" type="Label" parent="Items/HBoxContainer"]
 margin_top = 3.0
 margin_right = 42.0
 margin_bottom = 17.0
 text = "Health"
 
-[node name="ProgressBar" type="ProgressBar" parent="HBoxContainer2/HBoxContainer"]
+[node name="ProgressBar" type="ProgressBar" parent="Items/HBoxContainer"]
 margin_left = 46.0
 margin_right = 146.0
 margin_bottom = 14.0
@@ -76,7 +77,7 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="GridContainer" type="GridContainer" parent="HBoxContainer2"]
+[node name="GridContainer" type="GridContainer" parent="Items"]
 margin_left = 150.0
 margin_right = 416.0
 margin_bottom = 20.0
@@ -85,31 +86,34 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="Button" type="Button" parent="HBoxContainer2/GridContainer"]
+[node name="Button" type="Button" parent="Items/GridContainer"]
 margin_right = 50.0
 margin_bottom = 20.0
 text = "Items"
 
-[node name="Button2" type="Button" parent="HBoxContainer2/GridContainer"]
+[node name="Button2" type="Button" parent="Items/GridContainer"]
 margin_left = 54.0
 margin_right = 104.0
 margin_bottom = 20.0
 text = "Items"
 
-[node name="Button3" type="Button" parent="HBoxContainer2/GridContainer"]
+[node name="Button3" type="Button" parent="Items/GridContainer"]
 margin_left = 108.0
 margin_right = 158.0
 margin_bottom = 20.0
 text = "Items"
 
-[node name="Button4" type="Button" parent="HBoxContainer2/GridContainer"]
+[node name="Button4" type="Button" parent="Items/GridContainer"]
 margin_left = 162.0
 margin_right = 212.0
 margin_bottom = 20.0
 text = "Items"
 
-[node name="Button5" type="Button" parent="HBoxContainer2/GridContainer"]
+[node name="Button5" type="Button" parent="Items/GridContainer"]
 margin_left = 216.0
 margin_right = 266.0
 margin_bottom = 20.0
 text = "Items"
+
+[node name="GameOver" parent="." instance=ExtResource( 3 )]
+visible = false

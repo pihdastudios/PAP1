@@ -4,20 +4,32 @@ using System;
 public class Hud : CanvasLayer
 {
     private Label interactionLbl;
-    private Label gameOverLbl;
+    private CenterContainer center;
+    private HBoxContainer items;
+    private GameOver gameOver;
     public override void _Ready()
     {
-        interactionLbl = GetNode<Label>("CenterContainer/VBoxContainer/InteractionLabel");
-        gameOverLbl = GetNode<Label>("CenterContainer/VBoxContainer/GameOverLabel");
+        interactionLbl = GetNode<Label>("Center/VBoxContainer/InteractionLabel");
+        center = GetNode<CenterContainer>("Center");
+        items = GetNode<HBoxContainer>("Items");
+        gameOver = GetNode<GameOver>("GameOver");
     }
 
+    private void HideInterface()
+    {
+        center.Hide();
+        items.Hide();
+        gameOver.Show();
+    }
     public void Win()
     {
-        gameOverLbl.Text = "You Win";
+        gameOver.SetLabelText("Winner");
+        HideInterface();
     }
     
-    public void Loose()
+    public void Lose()
     {
-        gameOverLbl.Text = "You Lost";
+        gameOver.SetLabelText("Loser");
+        HideInterface();
     }
 }
