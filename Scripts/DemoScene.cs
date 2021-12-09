@@ -11,7 +11,7 @@ public partial class DemoScene : Spatial
 
     [Signal]
     public delegate void GameOverSignal(Role winner);
-    
+
     public enum Role
     {
         Attacker,
@@ -19,8 +19,12 @@ public partial class DemoScene : Spatial
     };
 
     private readonly PackedScene playerScn = GD.Load<PackedScene>("res://Scenes/Player/Player.tscn");
-    private readonly PackedScene controlledPlayerScn = GD.Load<PackedScene>("res://Scenes/Player/ControlledPlayer.tscn");
-    private readonly PackedScene nonControlledPlayerScn = GD.Load<PackedScene>("res://Scenes/Player/NonControlledPlayer.tscn");
+
+    private readonly PackedScene controlledPlayerScn =
+        GD.Load<PackedScene>("res://Scenes/Player/ControlledPlayer.tscn");
+
+    private readonly PackedScene nonControlledPlayerScn =
+        GD.Load<PackedScene>("res://Scenes/Player/NonControlledPlayer.tscn");
 
 
     public override void _Ready()
@@ -42,7 +46,7 @@ public partial class DemoScene : Spatial
         // {
         player1.Name = GetTree().GetNetworkUniqueId().ToString();
         player1.AddChild(controlledPlayer);
-        
+
         player2.Name = Globals.PeerId.ToString();
         player2.AddChild(nonControlledPlayer);
         // }
@@ -57,12 +61,11 @@ public partial class DemoScene : Spatial
 
         AddChild(player1);
         AddChild(player2);
-        
     }
 
     public void OnAreaBodyEntered(Node body)
     {
-        if (body?.Get("IsPlayerOne") != null && (bool) body.Get("IsPlayerOne")) 
+        if (body?.Get("IsPlayerOne") != null && (bool) body.Get("IsPlayerOne"))
         {
             EmitSignal(nameof(GameOverSignal), Role.Attacker);
         }

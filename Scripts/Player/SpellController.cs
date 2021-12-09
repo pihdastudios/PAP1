@@ -11,10 +11,10 @@ public class SpellController : Node
     {
         hand = GetParent().GetNode<Spatial>("Camera/ItemHolder");
         if (startingSpell != null)
-            equip_weapon(startingSpell);
+            EquipWeapon(startingSpell);
     }
 
-    private void equip_weapon(PackedScene weaponToEquip)
+    private void EquipWeapon(PackedScene weaponToEquip)
     {
         if (equippedWeapon != null)
             equippedWeapon.QueueFree();

@@ -134,7 +134,7 @@ public class Player : KinematicBody
         // if (Attribute.GetCustomAttribute(head.GetType(), typeof(ActivePlayer)) != null)
         if (head.HasMethod("IsPlayer"))
         {
-            RpcUnreliable("network_update", vel, MaxSlopeAngle);
+            RpcUnreliable("NetworkUpdate", vel, MaxSlopeAngle);
         }
 
         ProcessFootsteps(delta);
@@ -148,7 +148,7 @@ public class Player : KinematicBody
     }
 
     [Sync]
-    private void network_update(Vector3 updatedVel, int updatedMaxSlopeAngle)
+    private void NetworkUpdate(Vector3 updatedVel, int updatedMaxSlopeAngle)
     {
         vel = MoveAndSlide(updatedVel, new Vector3(0, 1, 0), true, 1, Mathf.Deg2Rad(updatedMaxSlopeAngle));
     }

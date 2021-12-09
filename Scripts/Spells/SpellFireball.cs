@@ -27,6 +27,6 @@ public class SpellFireball : Spatial
 		QueueFree();
 		if (!body.HasNode("Stats")) return;
 		var statsNode = body.FindNode("Stats") as Stats;
-		statsNode?.take_hit(Damage);
+		statsNode?.TakeHit(Damage);
 	}
 }

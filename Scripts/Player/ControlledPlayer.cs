@@ -75,19 +75,17 @@ public class ControlledPlayer : Spatial
 
     private void ProcessAim()
     {
-        if (cameraChange.Length() > 0)
+        if (!(cameraChange.Length() > 0)) return;
+        character.RotateY(Mathf.Deg2Rad(-cameraChange.x * Settings.MouseSensitivity));
+
+        var change = -cameraChange.y * Settings.MouseSensitivity;
+        if (change + cameraAngle < 90 && change + cameraAngle > -90)
         {
-            character.RotateY(Mathf.Deg2Rad(-cameraChange.x * Settings.MouseSensitivity));
-
-            var change = -cameraChange.y * Settings.MouseSensitivity;
-            if (change + cameraAngle < 90 && change + cameraAngle > -90)
-            {
-                camera.RotateX(Mathf.Deg2Rad(change));
-                cameraAngle += change;
-            }
-
-            cameraChange = new Vector2();
+            camera.RotateX(Mathf.Deg2Rad(change));
+            cameraAngle += change;
         }
+
+        cameraChange = new Vector2();
     }
 
     public void IsPlayer()

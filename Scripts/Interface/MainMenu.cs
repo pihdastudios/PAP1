@@ -135,7 +135,7 @@ public class MainMenu : Control
 	private void OnJoinPressed()
 	{
 		Globals.role = (int) Role.DEFENDER;
-		string ip = address.Text;
+		var ip = address.Text;
 		if (!ip.IsValidIPAddress())
 		{
 			SetStatus("IP address is invalid", false);
