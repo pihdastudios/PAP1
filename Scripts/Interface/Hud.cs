@@ -1,12 +1,13 @@
 using Godot;
 using System;
 
-public class Hud : CanvasLayer
+public class Hud : Control
 {
     private Label interactionLbl;
     private CenterContainer center;
     private HBoxContainer items;
     private GameOver gameOver;
+    
     public override void _Ready()
     {
         interactionLbl = GetNode<Label>("Center/VBoxContainer/InteractionLabel");
@@ -14,22 +15,22 @@ public class Hud : CanvasLayer
         items = GetNode<HBoxContainer>("Items");
         gameOver = GetNode<GameOver>("GameOver");
     }
-
-    private void HideInterface()
-    {
-        center.Hide();
-        items.Hide();
-        gameOver.Show();
-    }
+    
     public void Win()
     {
+        GD.Print("Win");
         gameOver.SetLabelText("Winner");
-        HideInterface();
+        gameOver.Show();
+        center.Hide();
+        items.Hide();
     }
     
     public void Lose()
     {
+        GD.Print("Lose");
         gameOver.SetLabelText("Loser");
-        HideInterface();
+        gameOver.Show();
+        center.Hide();
+        items.Hide();
     }
 }

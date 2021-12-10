@@ -4,8 +4,13 @@
 [ext_resource path="res://Assets/Sprites/pointer.png" type="Texture" id=2]
 [ext_resource path="res://Scenes/Interface/GameOver.tscn" type="PackedScene" id=3]
 
-[node name="HUD" type="CanvasLayer"]
+[node name="HUD" type="Control"]
+anchor_right = 1.0
+anchor_bottom = 1.0
 script = ExtResource( 1 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
 
 [node name="Center" type="CenterContainer" parent="."]
 anchor_right = 1.0

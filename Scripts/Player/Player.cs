@@ -303,7 +303,7 @@ public class Player : KinematicBody
     {
         if (currentStates.Contains(States.Sprinting))
         {
-            /// Reduce remaining sprint time
+            // Reduce remaining sprint time
             timeSprinting += delta;
             sprintTimeout -= delta;
             // hud.SprintBarValue = 100 * (MaxSprintTime - timeSprinting) / MaxSprintTime;
@@ -348,72 +348,68 @@ public class Player : KinematicBody
 
     private void ProcessWalking(float delta)
     {
-        if (!isDead)
+        if (isDead) return;
+        dir.y = 0;
+        dir = dir.Normalized();
+
+        var hvel = vel;
+        hvel.y = 0;
+
+        var target = dir;
+
+        if (currentStates.Contains(States.Sprinting))
         {
-            dir.y = 0;
-            dir = dir.Normalized();
+            target *= MaxSprintSpeed;
+        }
+        else if (isCrouching)
+        {
+            target *= MaxCrouchSpeed;
+        }
+        else
+        {
+            target *= MaxSpeed;
+        }
 
-            var hvel = vel;
-            hvel.y = 0;
-
-            var target = dir;
-
+        float accel;
+        if (dir.Dot(hvel) > 0)
+        {
             if (currentStates.Contains(States.Sprinting))
             {
-                target *= MaxSprintSpeed;
+                accel = SprintAccel;
             }
             else if (isCrouching)
             {
-                target *= MaxCrouchSpeed;
+                accel = CrouchAccel;
             }
             else
             {
-                target *= MaxSpeed;
+                accel = Accel;
             }
+        }
+        else
+        {
+            accel = Deaccel;
+        }
 
-            float accel;
-            if (dir.Dot(hvel) > 0)
-            {
-                if (currentStates.Contains(States.Sprinting))
-                {
-                    accel = SprintAccel;
-                }
-                else if (isCrouching)
-                {
-                    accel = CrouchAccel;
-                }
-                else
-                {
-                    accel = Accel;
-                }
-            }
-            else
-            {
-                accel = Deaccel;
-            }
-
-            hvel = hvel.LinearInterpolate(target, accel * delta);
+        hvel = hvel.LinearInterpolate(target, accel * delta);
 
 
-            vel.x = hvel.x;
-            vel.z = hvel.z;
+        vel.x = hvel.x;
+        vel.z = hvel.z;
 
-            if (new Vector2(vel.x, vel.z).Length() == 0f)
-            {
-                RemoveState(States.Walking);
-            }
+        if (new Vector2(vel.x, vel.z).Length() == 0f)
+        {
+            RemoveState(States.Walking);
         }
     }
 
     public void Win()
     {
-        GD.Print("Win");
         hud.Win();
     }
 
     public void Lose()
     {
-        GD.Print("Lose");
         hud.Lose();
     }
 }

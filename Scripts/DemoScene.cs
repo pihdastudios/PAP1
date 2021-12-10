@@ -62,7 +62,6 @@ public partial class DemoScene : Spatial
         if (body?.Get("IsPlayerOne") != null && (bool) body.Get("IsPlayerOne"))
         {
             EmitSignal(nameof(GameOverSignal), Globals.Role.Attacker);
-            // GD.Print("win");
         }
     }
 
