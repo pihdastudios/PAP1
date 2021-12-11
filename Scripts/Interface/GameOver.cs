@@ -1,5 +1,6 @@
 using Godot;
 using System;
+using Pap1.Scripts;
 
 public class GameOver : Control
 {

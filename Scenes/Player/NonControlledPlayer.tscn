@@ -1,6 +1,7 @@
-[gd_scene load_steps=2 format=2]
+[gd_scene load_steps=3 format=2]
 
 [ext_resource path="res://Scripts/Player/NonControlledPlayer.cs" type="Script" id=1]
+[ext_resource path="res://Scenes/Spells/Spell.tscn" type="PackedScene" id=3]
 
 [node name="Head" type="Spatial"]
 script = ExtResource( 1 )
@@ -10,10 +11,7 @@ transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.01984, 0 )
 
 [node name="ItemHolder" type="Spatial" parent="Camera"]
 
-[node name="Flashlight" type="SpotLight" parent="Camera/ItemHolder"]
-shadow_enabled = true
-editor_only = true
-spot_angle_attenuation = 2.0
+[node name="Spell" parent="Camera/ItemHolder" instance=ExtResource( 3 )]
 
 [node name="LookAt" type="Position3D" parent="Camera"]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -2 )

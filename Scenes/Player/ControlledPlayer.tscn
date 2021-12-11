@@ -1,7 +1,7 @@
 [gd_scene load_steps=3 format=2]
 
 [ext_resource path="res://Scripts/Player/ControlledPlayer.cs" type="Script" id=1]
-[ext_resource path="res://Scripts/Player/SpellController.cs" type="Script" id=2]
+[ext_resource path="res://Scenes/Spells/Spell.tscn" type="PackedScene" id=3]
 
 [node name="Head" type="Spatial"]
 script = ExtResource( 1 )
@@ -11,10 +11,7 @@ transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.01984, 0 )
 
 [node name="ItemHolder" type="Spatial" parent="Camera"]
 
-[node name="Flashlight" type="SpotLight" parent="Camera/ItemHolder"]
-shadow_enabled = true
-editor_only = true
-spot_angle_attenuation = 2.0
+[node name="Spell" parent="Camera/ItemHolder" instance=ExtResource( 3 )]
 
 [node name="LookAt" type="Position3D" parent="Camera"]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -2 )
@@ -27,5 +24,6 @@ transform = Transform( 1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 0, 0
 enabled = true
 collision_mask = 2
 
-[node name="SpellController" type="Node" parent="."]
-script = ExtResource( 2 )
+[node name="Timer" type="Timer" parent="."]
+
+[connection signal="timeout" from="Timer" to="." method="_on_Timer_timeout"]
