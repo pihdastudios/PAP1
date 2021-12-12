@@ -1,4 +1,4 @@
-[gd_scene load_steps=17 format=2]
+[gd_scene load_steps=18 format=2]
 
 [ext_resource path="res://Scenes/FantasyTown/fountainEdge.tscn" type="PackedScene" id=1]
 [ext_resource path="res://Scenes/FantasyTown/fountainCorner.tscn" type="PackedScene" id=2]
@@ -13,6 +13,7 @@
 [ext_resource path="res://Scenes/FantasyTown/planks.tscn" type="PackedScene" id=11]
 [ext_resource path="res://Scenes/FantasyTown/blade.tscn" type="PackedScene" id=12]
 [ext_resource path="res://Scripts/DemoScene.cs" type="Script" id=13]
+[ext_resource path="res://Scenes/Items/Apple.tscn" type="PackedScene" id=14]
 
 [sub_resource type="ProceduralSky" id=1]
 sky_top_color = Color( 0.588235, 0.831373, 0.968627, 1 )
@@ -656,6 +657,9 @@ transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 10.9576, 0, 0 )
 [node name="CollisionShape" type="CollisionShape" parent="Area"]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -0.424739, 0, 0 )
 shape = SubResource( 3 )
+
+[node name="Apple" parent="." instance=ExtResource( 14 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 4.89858, 2.36571, 2.33638 )
 
 [connection signal="GameOverSignal" from="." to="." method="OnGameOver"]
 [connection signal="body_entered" from="Area" to="." method="OnAreaBodyEntered"]
