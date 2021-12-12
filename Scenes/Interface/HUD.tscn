@@ -12,7 +12,7 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="Center" type="CenterContainer" parent="."]
+[node name="Center" type="CenterContainer" parent="." groups=["HUDElement"]]
 anchor_right = 1.0
 anchor_bottom = 1.0
 __meta__ = {
@@ -49,7 +49,7 @@ margin_bottom = 66.0
 text = "Es"
 align = 1
 
-[node name="Items" type="HBoxContainer" parent="."]
+[node name="Items" type="HBoxContainer" parent="." groups=["HUDElement"]]
 anchor_top = 1.0
 anchor_bottom = 1.0
 margin_left = 100.0

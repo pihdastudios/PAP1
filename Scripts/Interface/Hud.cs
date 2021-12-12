@@ -21,8 +21,7 @@ public class Hud : Control
         GD.Print("Win");
         gameOver.SetLabelText("Winner");
         gameOver.Show();
-        center.Hide();
-        items.Hide();
+        GetTree().CallGroup("HUDElement", "hide");
     }
     
     public void Lose()
@@ -30,7 +29,6 @@ public class Hud : Control
         GD.Print("Lose");
         gameOver.SetLabelText("Loser");
         gameOver.Show();
-        center.Hide();
-        items.Hide();
+        GetTree().CallGroup("HUDElement", "hide");
     }
 }
