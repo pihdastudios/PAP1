@@ -1,0 +1,14 @@
+[gd_scene load_steps=3 format=2]
+
+[ext_resource path="res://Assets/Sprites/Player/healthBar_green.png" type="Texture" id=1]
+[ext_resource path="res://Scripts/Player/HealthBar2D.cs" type="Script" id=2]
+
+[node name="HealthBar2D" type="TextureProgress"]
+margin_right = 40.0
+margin_bottom = 40.0
+value = 100.0
+texture_progress = ExtResource( 1 )
+script = ExtResource( 2 )
+__meta__ = {
+"_edit_use_anchors_": false
+}

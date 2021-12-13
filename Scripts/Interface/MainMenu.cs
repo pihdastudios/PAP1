@@ -9,7 +9,6 @@ public class MainMenu : Control
 
 	private const int DefaultPort = 8910; // An arbitrary number.
 	private const int MaxNumberOfPeers = 1; // How many people we want to have in a game
-	private enum Role {ATTACKER, DEFENDER};
 
 	private LineEdit address;
 	private Button hostButton;

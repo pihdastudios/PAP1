@@ -21,6 +21,7 @@ public class ControlledPlayer : Spatial
 		camera.Current = true;
 		rofTimer = GetNode<Timer>("Timer");
 		rofTimer.WaitTime = MillisBetweenShots / 1000;
+		character.GetNode<HealthBar3D>("HealthBar3D").Visible = false;
 	}
 
 	public override void _Input(InputEvent @event)
@@ -40,6 +41,7 @@ public class ControlledPlayer : Spatial
 		switch ((ButtonList) mouseEvent.ButtonIndex)
 		{
 			case ButtonList.Left:
+				if (Globals.CurrentRole == Globals.Role.Attacker) return;
 				if (!canShoot) return;
 				character.Fire();
 				canShoot = false;

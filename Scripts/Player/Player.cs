@@ -28,9 +28,13 @@ public class Player : KinematicBody
 	private const float CrouchAccel = 2.5f;
 	private const int Deaccel = 5;
 	private const int MaxSlopeAngle = 40;
+	public float slowEffect = 0;
 
 	private const int MaxSprintTime = 2;
 	private const int MaxSprintTimeout = 4;
+	public float maxHealth = 100;
+	public float health = 100;
+	public HealthBar3D healthBar;
 	const float SprintFov = 95;
 
 	const int MaxStairSlope = 20;
@@ -94,9 +98,12 @@ public class Player : KinematicBody
 
 	public override void _Ready()
 	{
+		healthBar = GetNode<HealthBar3D>("HealthBar3D");
+		healthBar.update(health, maxHealth);
 		camera = GetNode<Camera>("Head/Camera");
 //		Input.SetMouseMode(Input.MouseMode.Captured);
 		hud = GetNode<Hud>("Hud");
+		hud.updateHealth(health);
 		head = GetNode<Spatial>("Head");
 		floorCheck = GetNode<RayCast>("FloorCheck");
 
@@ -106,6 +113,44 @@ public class Player : KinematicBody
 		dir = new Vector3();
 
 		currentStates = new List<States>();
+	}
+
+	public void takeDamage(float damage)
+	{
+		health -= damage;
+		healthBar.update(health, maxHealth);
+		hud.updateHealth(health);
+		slowEffect += 0.3f;
+		if(slowEffect>0.9f)
+			slowEffect = 0.9f;
+		if(health<=0 && Globals.CurrentRole==Globals.Role.Attacker)
+		{
+			Rpc("ResetPosition");
+		}
+		cancelEffect();
+	}
+
+	private async void cancelEffect()
+	{
+		var t = new Timer();
+		t.WaitTime = 5;
+		t.OneShot = true;
+		AddChild(t);
+		t.Start();
+		await ToSignal(t, "timeout");
+		t.QueueFree();
+		slowEffect -= 0.3f;
+		if(slowEffect<0)
+			slowEffect = 0f;
+	}
+
+	[Sync]
+	private void ResetPosition()
+	{
+		GlobalTransform = GetTree().Root.GetNode<Position3D>("DemoScene/Player1Pos").GlobalTransform;
+		health = maxHealth;
+		healthBar.update(health, maxHealth);
+		hud.updateHealth(health);
 	}
 
 //	public override void _Input(InputEvent @event)
@@ -162,10 +207,9 @@ public class Player : KinematicBody
 	[Sync]
 	private void NetworkUpdate2(Transform pos)
 	{
-		var currentProjectile = GD.Load<PackedScene>("res://Scenes/Spells/SpellFireball.tscn");
-		var newProjectile = currentProjectile.Instance<SpellFireball>();
+		var currentProjectile = GD.Load<PackedScene>("res://Scenes/Spells/SpellApple.tscn");
+		var newProjectile = currentProjectile.Instance<SpellApple>();
 		newProjectile.GlobalTransform = pos;
-		newProjectile.Speed = 20;
 		var sceneRoot = GetTree().Root.GetChildren()[1] as Node;
 		sceneRoot?.AddChild(newProjectile);
 	}
@@ -202,41 +246,13 @@ public class Player : KinematicBody
 		// }
 	}
 
-//	private void ProcessAim()
-//	{
-//		if (cameraChange.Length() > 0)
-//		{
-//			this.RotateY(Mathf.Deg2Rad(-cameraChange.x * Settings.MouseSensitivity));
-//
-//			var change = -cameraChange.y * Settings.MouseSensitivity;
-//			if (change + cameraAngle < 90 && change + cameraAngle > -90)
-//			{
-//				camera.RotateX(Mathf.Deg2Rad(change));
-//				cameraAngle += change;
-//			}
-//
-//			cameraChange = new Vector2();
-//		}
-//	}
-
 	private void ProcessInput(float _)
 	{
 		inputMovemnetVec = new Vector2();
 		dir = new Vector3();
 		var camXform = GlobalTransform;
-//
-//		if (Input.IsActionPressed("move_forward"))
-//			// GD.Print("maju");
-//			inputMovemnetVec.y += 1;
-//		if (Input.IsActionPressed("move_backward"))
-//			inputMovemnetVec.y -= 1;
-//		if (Input.IsActionPressed("move_left"))
-//			inputMovemnetVec.x -= 1;
-//		if (Input.IsActionPressed("move_right"))
-//			inputMovemnetVec.x += 1;
-//
+
 		if (Command[(int) Key.Forward])
-			// GD.Print("maju");
 			inputMovemnetVec.y += 1;
 		if (Command[(int) Key.Backward])
 			inputMovemnetVec.y -= 1;
@@ -408,7 +424,7 @@ public class Player : KinematicBody
 			accel = Deaccel;
 		}
 
-		hvel = hvel.LinearInterpolate(target, accel * delta);
+		hvel = hvel.LinearInterpolate(target, accel * delta * (1-slowEffect));
 
 
 		vel.x = hvel.x;

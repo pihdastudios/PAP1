@@ -4,22 +4,16 @@ using Pap1.Scripts;
 
 public class NonControlledPlayer : Spatial
 {
-	// Declare member variables here. Examples:
-	// private int a = 2;
-	// private string b = "text";
-
-	// Called when the node enters the scene tree for the first time.
+	private Player character;
+	private Hud hud;
 	public override void _Ready()
 	{
+		character = GetParent<Player>();
+		hud = character.GetNode<Hud>("Hud");
+		hud.Hide();
 	}
 	
 	public override void _PhysicsProcess(float delta)
 	{
 	}
-
-//  // Called every frame. 'delta' is the elapsed time since the previous frame.
-//  public override void _Process(float delta)
-//  {
-//      
-//  }
 }
