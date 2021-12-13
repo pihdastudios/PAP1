@@ -7,6 +7,7 @@ public static class Globals
         Attacker,
         Defender
     };
+
     public static int PeerId;
     public static Role CurrentRole;
 }

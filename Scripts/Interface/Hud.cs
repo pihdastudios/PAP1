@@ -38,4 +38,9 @@ public class Hud : Control
 	{
 		progressBar.Value = amount;
 	}
+
+	public void SetInteractionText(string text)
+	{
+		interactionLbl.Text = text;
+	}
 }
