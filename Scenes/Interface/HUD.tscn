@@ -22,21 +22,21 @@ __meta__ = {
 
 [node name="VBoxContainer" type="VBoxContainer" parent="Center"]
 margin_left = 497.0
-margin_top = 253.0
+margin_top = 247.0
 margin_right = 527.0
-margin_bottom = 347.0
+margin_bottom = 353.0
 alignment = 1
 
 [node name="GameOverLabel" type="Label" parent="Center/VBoxContainer"]
 margin_right = 30.0
-margin_bottom = 28.0
+margin_bottom = 34.0
 custom_fonts/font = ExtResource( 4 )
 align = 2
 
 [node name="TextureRect" type="TextureRect" parent="Center/VBoxContainer"]
-margin_top = 32.0
+margin_top = 38.0
 margin_right = 30.0
-margin_bottom = 62.0
+margin_bottom = 68.0
 rect_min_size = Vector2( 30, 30 )
 texture = ExtResource( 2 )
 expand = true
@@ -45,9 +45,9 @@ __meta__ = {
 }
 
 [node name="InteractionLabel" type="Label" parent="Center/VBoxContainer"]
-margin_top = 66.0
+margin_top = 72.0
 margin_right = 30.0
-margin_bottom = 94.0
+margin_bottom = 106.0
 custom_fonts/font = ExtResource( 4 )
 text = "Es"
 align = 1
@@ -64,23 +64,23 @@ __meta__ = {
 }
 
 [node name="HBoxContainer" type="HBoxContainer" parent="Items"]
-margin_right = 165.0
-margin_bottom = 34.0
+margin_right = 178.0
+margin_bottom = 40.0
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
 [node name="Label" type="Label" parent="Items/HBoxContainer"]
 margin_top = 3.0
-margin_right = 61.0
-margin_bottom = 31.0
+margin_right = 74.0
+margin_bottom = 37.0
 custom_fonts/font = ExtResource( 4 )
 text = "Health"
 
 [node name="ProgressBar" type="ProgressBar" parent="Items/HBoxContainer"]
-margin_left = 65.0
-margin_right = 165.0
-margin_bottom = 28.0
+margin_left = 78.0
+margin_right = 178.0
+margin_bottom = 34.0
 rect_min_size = Vector2( 100, 0 )
 custom_fonts/font = ExtResource( 4 )
 __meta__ = {
@@ -88,47 +88,48 @@ __meta__ = {
 }
 
 [node name="GridContainer" type="GridContainer" parent="Items"]
-margin_left = 169.0
-margin_right = 510.0
-margin_bottom = 34.0
+margin_left = 182.0
+margin_right = 568.0
+margin_bottom = 40.0
 columns = 10
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
 [node name="Button" type="Button" parent="Items/GridContainer"]
-margin_right = 65.0
-margin_bottom = 34.0
+margin_right = 74.0
+margin_bottom = 40.0
 custom_fonts/font = ExtResource( 4 )
 text = "Items"
 
 [node name="Button2" type="Button" parent="Items/GridContainer"]
-margin_left = 69.0
-margin_right = 134.0
-margin_bottom = 34.0
+margin_left = 78.0
+margin_right = 152.0
+margin_bottom = 40.0
 custom_fonts/font = ExtResource( 4 )
 text = "Items"
 
 [node name="Button3" type="Button" parent="Items/GridContainer"]
-margin_left = 138.0
-margin_right = 203.0
-margin_bottom = 34.0
+margin_left = 156.0
+margin_right = 230.0
+margin_bottom = 40.0
 custom_fonts/font = ExtResource( 4 )
 text = "Items"
 
 [node name="Button4" type="Button" parent="Items/GridContainer"]
-margin_left = 207.0
-margin_right = 272.0
-margin_bottom = 34.0
+margin_left = 234.0
+margin_right = 308.0
+margin_bottom = 40.0
 custom_fonts/font = ExtResource( 4 )
 text = "Items"
 
 [node name="Button5" type="Button" parent="Items/GridContainer"]
-margin_left = 276.0
-margin_right = 341.0
-margin_bottom = 34.0
+margin_left = 312.0
+margin_right = 386.0
+margin_bottom = 40.0
 custom_fonts/font = ExtResource( 4 )
 text = "Items"
 
 [node name="GameOver" parent="." instance=ExtResource( 3 )]
+pause_mode = 2
 visible = false

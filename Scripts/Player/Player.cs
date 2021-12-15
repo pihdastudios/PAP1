@@ -429,10 +429,12 @@ public class Player : KinematicBody
     public void Win()
     {
         hud.Win();
+        PauseMode = PauseModeEnum.Stop;
     }
 
     public void Lose()
     {
         hud.Lose();
+        PauseMode = PauseModeEnum.Stop;
     }
 }
