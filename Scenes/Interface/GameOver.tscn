@@ -1,7 +1,8 @@
-[gd_scene load_steps=4 format=2]
+[gd_scene load_steps=5 format=2]
 
 [ext_resource path="res://Scripts/Interface/GameOver.cs" type="Script" id=1]
 [ext_resource path="res://Assets/Fonts/OpenSans/OpenSans-Bold.ttf" type="DynamicFontData" id=2]
+[ext_resource path="res://Assets/Fonts/OpenSans/DefaultInterfaceFont.tres" type="DynamicFont" id=3]
 
 [sub_resource type="DynamicFont" id=1]
 size = 100
@@ -32,20 +33,37 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="CenterContainer" type="CenterContainer" parent="CenterContainer/Panel"]
+[node name="VBoxContainer" type="VBoxContainer" parent="CenterContainer/Panel"]
 anchor_right = 1.0
 anchor_bottom = 1.0
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="Label" type="Label" parent="CenterContainer/Panel/CenterContainer"]
+[node name="CenterContainer" type="CenterContainer" parent="CenterContainer/Panel/VBoxContainer"]
+margin_right = 400.0
+margin_bottom = 137.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Label" type="Label" parent="CenterContainer/Panel/VBoxContainer/CenterContainer"]
 margin_left = 18.0
-margin_top = 31.0
 margin_right = 382.0
-margin_bottom = 168.0
+margin_bottom = 137.0
 custom_fonts/font = SubResource( 1 )
 text = "Winner"
 __meta__ = {
 "_edit_use_anchors_": false
 }
+
+[node name="QuitBtn" type="Button" parent="CenterContainer/Panel/VBoxContainer"]
+margin_left = 169.0
+margin_top = 141.0
+margin_right = 230.0
+margin_bottom = 181.0
+size_flags_horizontal = 4
+custom_fonts/font = ExtResource( 3 )
+text = "Quit"
+
+[connection signal="pressed" from="CenterContainer/Panel/VBoxContainer/QuitBtn" to="." method="OnQuitBtnPressed"]

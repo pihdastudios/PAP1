@@ -14,4 +14,9 @@ public class GameOver : Control
     {
         gameOverLabel.Text = text;
     }
+
+    public void OnQuitBtnPressed()
+    {
+        GetTree().Quit();
+    }
 }
