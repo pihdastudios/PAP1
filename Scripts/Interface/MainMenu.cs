@@ -20,11 +20,11 @@ public class MainMenu : Control
 	public override void _Ready()
 	{
 		// Get nodes - the generic is a class, argument is node path.
-		address = GetNode<LineEdit>("LobbyPanel/Address");
-		hostButton = GetNode<Button>("LobbyPanel/HostButton");
-		joinButton = GetNode<Button>("LobbyPanel/JoinButton");
-		statusOk = GetNode<Label>("LobbyPanel/StatusOk");
-		statusFail = GetNode<Label>("LobbyPanel/StatusFail");
+		address = GetNode<LineEdit>("LobbyPanel/VBoxContainer/HBoxContainer2/Address");
+		hostButton = GetNode<Button>("LobbyPanel/VBoxContainer/HBoxContainer/HostButton");
+		joinButton = GetNode<Button>("LobbyPanel/VBoxContainer/HBoxContainer/JoinButton");
+		statusOk = GetNode<Label>("LobbyPanel/VBoxContainer/StatusOk");
+		statusFail = GetNode<Label>("LobbyPanel/VBoxContainer/StatusFail");
 
 		// Connect all callbacks related to networking.
 		// Note: Use snake_case when talking to engine API.

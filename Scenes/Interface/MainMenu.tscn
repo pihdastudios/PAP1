@@ -1,6 +1,7 @@
-[gd_scene load_steps=2 format=2]
+[gd_scene load_steps=3 format=2]
 
 [ext_resource path="res://Scripts/Interface/MainMenu.cs" type="Script" id=1]
+[ext_resource path="res://Assets/Fonts/OpenSans/DefaultInterfaceFont.tres" type="DynamicFont" id=2]
 
 [node name="MainMenu" type="Control"]
 anchor_left = 0.5
@@ -25,85 +26,112 @@ margin_right = 430.0
 margin_bottom = 80.0
 size_flags_horizontal = 2
 size_flags_vertical = 0
+custom_fonts/font = ExtResource( 2 )
 text = "Food"
 align = 1
 valign = 1
 
 [node name="LobbyPanel" type="Panel" parent="."]
-margin_left = 210.0
-margin_top = 160.0
-margin_right = 430.0
-margin_bottom = 270.0
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -220.0
+margin_top = -110.0
+margin_right = 220.0
+margin_bottom = 110.0
 size_flags_horizontal = 2
 size_flags_vertical = 2
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="AddressLabel" type="Label" parent="LobbyPanel"]
+[node name="VBoxContainer" type="VBoxContainer" parent="LobbyPanel"]
+anchor_right = 1.0
+anchor_bottom = 1.0
 margin_left = 10.0
 margin_top = 10.0
-margin_right = 62.0
-margin_bottom = 24.0
-size_flags_horizontal = 2
-size_flags_vertical = 0
+margin_right = -10.0
+margin_bottom = -10.0
+custom_constants/separation = 20
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="HBoxContainer2" type="HBoxContainer" parent="LobbyPanel/VBoxContainer"]
+margin_right = 420.0
+margin_bottom = 44.0
+custom_constants/separation = 40
+
+[node name="AddressLabel" type="Label" parent="LobbyPanel/VBoxContainer/HBoxContainer2"]
+margin_right = 90.0
+margin_bottom = 44.0
+size_flags_horizontal = 0
+size_flags_vertical = 1
+custom_fonts/font = ExtResource( 2 )
 text = "Address"
 
-[node name="Address" type="LineEdit" parent="LobbyPanel"]
-margin_left = 10.0
-margin_top = 30.0
-margin_right = 210.0
-margin_bottom = 54.0
-size_flags_horizontal = 2
-size_flags_vertical = 2
+[node name="Address" type="LineEdit" parent="LobbyPanel/VBoxContainer/HBoxContainer2"]
+margin_left = 130.0
+margin_right = 420.0
+margin_bottom = 44.0
+size_flags_horizontal = 3
+custom_fonts/font = ExtResource( 2 )
 text = "127.0.0.1"
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="HostButton" type="Button" parent="LobbyPanel"]
-margin_left = 10.0
-margin_top = 60.0
-margin_right = 90.0
-margin_bottom = 80.0
-size_flags_horizontal = 2
-size_flags_vertical = 2
+[node name="HBoxContainer" type="HBoxContainer" parent="LobbyPanel/VBoxContainer"]
+margin_top = 64.0
+margin_right = 420.0
+margin_bottom = 104.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="HostButton" type="Button" parent="LobbyPanel/VBoxContainer/HBoxContainer"]
+margin_right = 208.0
+margin_bottom = 40.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+custom_fonts/font = ExtResource( 2 )
 text = "Host"
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="JoinButton" type="Button" parent="LobbyPanel"]
-margin_left = 130.0
-margin_top = 60.0
-margin_right = 210.0
-margin_bottom = 80.0
-size_flags_horizontal = 2
-size_flags_vertical = 2
+[node name="JoinButton" type="Button" parent="LobbyPanel/VBoxContainer/HBoxContainer"]
+margin_left = 212.0
+margin_right = 420.0
+margin_bottom = 40.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+custom_fonts/font = ExtResource( 2 )
 text = "Join"
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="StatusOk" type="Label" parent="LobbyPanel"]
-margin_left = 10.0
-margin_top = 90.0
-margin_right = 210.0
-margin_bottom = 104.0
-size_flags_horizontal = 2
-size_flags_vertical = 0
+[node name="StatusOk" type="Label" parent="LobbyPanel/VBoxContainer"]
+margin_top = 124.0
+margin_right = 420.0
+margin_bottom = 158.0
+size_flags_horizontal = 3
+size_flags_vertical = 1
 custom_colors/font_color = Color( 0, 1, 0.015625, 1 )
+custom_fonts/font = ExtResource( 2 )
 align = 1
 
-[node name="StatusFail" type="Label" parent="LobbyPanel"]
-margin_left = 10.0
-margin_top = 90.0
-margin_right = 210.0
-margin_bottom = 104.0
-size_flags_horizontal = 2
-size_flags_vertical = 0
+[node name="StatusFail" type="Label" parent="LobbyPanel/VBoxContainer"]
+margin_top = 178.0
+margin_right = 420.0
+margin_bottom = 212.0
+size_flags_horizontal = 3
+size_flags_vertical = 1
 custom_colors/font_color = Color( 1, 0, 0, 1 )
+custom_fonts/font = ExtResource( 2 )
 align = 1
 
-[connection signal="pressed" from="LobbyPanel/HostButton" to="." method="OnHostPressed"]
-[connection signal="pressed" from="LobbyPanel/JoinButton" to="." method="OnJoinPressed"]
+[connection signal="pressed" from="LobbyPanel/VBoxContainer/HBoxContainer/HostButton" to="." method="OnHostPressed"]
+[connection signal="pressed" from="LobbyPanel/VBoxContainer/HBoxContainer/JoinButton" to="." method="OnJoinPressed"]

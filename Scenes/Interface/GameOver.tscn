@@ -1,6 +1,11 @@
-[gd_scene load_steps=2 format=2]
+[gd_scene load_steps=4 format=2]
 
 [ext_resource path="res://Scripts/Interface/GameOver.cs" type="Script" id=1]
+[ext_resource path="res://Assets/Fonts/OpenSans/OpenSans-Bold.ttf" type="DynamicFontData" id=2]
+
+[sub_resource type="DynamicFont" id=1]
+size = 100
+font_data = ExtResource( 2 )
 
 [node name="GameOver" type="Control"]
 anchor_right = 1.0
@@ -18,14 +23,15 @@ __meta__ = {
 }
 
 [node name="VBoxContainer" type="VBoxContainer" parent="CenterContainer"]
-margin_left = 489.0
-margin_top = 293.0
-margin_right = 535.0
-margin_bottom = 307.0
+margin_left = 330.0
+margin_top = 231.0
+margin_right = 694.0
+margin_bottom = 368.0
 
 [node name="Label" type="Label" parent="CenterContainer/VBoxContainer"]
-margin_right = 46.0
-margin_bottom = 14.0
+margin_right = 364.0
+margin_bottom = 137.0
+custom_fonts/font = SubResource( 1 )
 text = "Winner"
 __meta__ = {
 "_edit_use_anchors_": false
