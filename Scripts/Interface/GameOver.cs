@@ -4,19 +4,19 @@ using Pap1.Scripts;
 
 public class GameOver : Control
 {
-    private Label gameOverLabel;
-    public override void _Ready()
-    {
-        gameOverLabel = GetNode<Label>("CenterContainer/VBoxContainer/Label");
-    }
+	private Label gameOverLabel;
+	public override void _Ready()
+	{
+		gameOverLabel = GetNode<Label>("CenterContainer/Panel/VBoxContainer/CenterContainer/Label");
+	}
 
-    public void SetLabelText(string text)
-    {
-        gameOverLabel.Text = text;
-    }
+	public void SetLabelText(string text)
+	{
+		gameOverLabel.Text = text;
+	}
 
-    public void OnQuitBtnPressed()
-    {
-        GetTree().Quit();
-    }
+	public void OnQuitBtnPressed()
+	{
+		GetTree().Quit();
+	}
 }
