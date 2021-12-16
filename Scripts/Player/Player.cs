@@ -19,7 +19,7 @@ public class Player : KinematicBody
   #region Physics properties
 
   private const int Gravity = -25;
-  private const int MaxSpeed = 5;
+  private const int MaxSpeed = 3;
   private const int MaxSprintSpeed = 6;
   private const int MaxCrouchSpeed = 5;
   private const int JumpSpeed = 4;

@@ -3,19 +3,19 @@ using System;
 
 public class AppleSB : StaticBody, IInteractable
 {
-    public override void _Ready()
-    {
-    }
+  public override void _Ready()
+  {
+  }
 
-    public bool Disabled { get; set; }
+  public bool Disabled { get; set; }
 
-    public void Interact()
-    {
-        return;
-    }
+  public void Interact()
+  {
+    return;
+  }
 
-    public string GetInfo()
-    {
-        return "Get Apple";
-    }
+  public string GetInfo()
+  {
+    return "Get Apple (E)";
+  }
 }

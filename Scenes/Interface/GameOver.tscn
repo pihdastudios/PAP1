@@ -58,12 +58,12 @@ __meta__ = {
 }
 
 [node name="QuitBtn" type="Button" parent="CenterContainer/Panel/VBoxContainer"]
-margin_left = 169.0
+margin_left = 86.0
 margin_top = 141.0
-margin_right = 230.0
+margin_right = 314.0
 margin_bottom = 181.0
 size_flags_horizontal = 4
 custom_fonts/font = ExtResource( 3 )
-text = "Quit"
+text = "Back to main menu"
 
 [connection signal="pressed" from="CenterContainer/Panel/VBoxContainer/QuitBtn" to="." method="OnQuitBtnPressed"]

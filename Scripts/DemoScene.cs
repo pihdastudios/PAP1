@@ -20,6 +20,7 @@ public partial class DemoScene : Spatial
   private readonly PackedScene nonControlledPlayerScn =
   GD.Load<PackedScene>("res://Scenes/Player/NonControlledPlayer.tscn");
 
+  public bool isGameOver = false;
 
   public override void _Ready()
   {
@@ -68,6 +69,7 @@ public partial class DemoScene : Spatial
 
   public void OnGameOver(Globals.Role winner)
   {
+	isGameOver = true;
 	switch (winner)
 	{
 	  case Globals.Role.Attacker:
